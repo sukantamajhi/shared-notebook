@@ -5,16 +5,13 @@ import {useEffect} from "react";
 export default function Home() {
 
 	useEffect(() => {
-		const timeout = setTimeout(() => {
+		setInterval(() => {
 			fetch("https://shared-notebook.onrender.com").then(() => {
 				console.log("Working on render");
 			}).catch(err => {
 				console.log(err, "<<-- Error in working on render");
 			})
 		}, 40000)
-		return () => {
-			clearTimeout(timeout);
-		}
 	}, []);
 
 	return (
