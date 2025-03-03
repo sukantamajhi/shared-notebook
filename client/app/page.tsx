@@ -1,114 +1,119 @@
-"use client"
-import Image from "next/image";
-import {useEffect} from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
-export default function Home() {
-
-	useEffect(() => {
-		setInterval(() => {
-			fetch("https://shared-notebook.onrender.com").then(() => {
-				console.log("Working on render");
-			}).catch(err => {
-				console.log(err, "<<-- Error in working on render");
-			})
-		}, 40000)
-	}, []);
-
+export default function HomePage() {
 	return (
-		<div
-			className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-			<main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-				<Image
-					className="dark:invert"
-					src="/next.svg"
-					alt="Next.js logo"
-					width={180}
-					height={38}
-					priority
-				/>
-				<ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-					<li className="mb-2">
-						Get started by editing{" "}
-						<code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-							app/page.tsx
-						</code>
-						.
-					</li>
-					<li>Save and see your changes instantly.</li>
-				</ol>
-
-				<div className="flex gap-4 items-center flex-col sm:flex-row">
-					<a
-						className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-						href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<Image
-							className="dark:invert"
-							src="/vercel.svg"
-							alt="Vercel logomark"
-							width={20}
-							height={20}
-						/>
-						Deploy now
-					</a>
-					<a
-						className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-						href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Read our docs
-					</a>
+		<div className='flex min-h-screen flex-col bg-background'>
+			<header className='sticky top-0 z-40 border-b bg-background shadow-md'>
+				<div className='container flex items-center justify-between py-4 flex-col sm:flex-row'>
+					<div className='flex items-center gap-2'>
+						<Link
+							href='/'
+							className='text-xl font-bold sm:text-2xl'>
+							SharedNotebook
+						</Link>
+					</div>
+					<div className='flex flex-col sm:flex-row items-center gap-4 mt-4 sm:mt-0'>
+						<Link href='/auth/login'>
+							<Button variant='ghost'>Login</Button>
+						</Link>
+						<Link href='/auth/register'>
+							<Button>Sign Up</Button>
+						</Link>
+					</div>
 				</div>
+			</header>
+
+			<main className='flex-1'>
+				<section className='space-y-6 pb-8 pt-6 sm:pb-12 sm:pt-10 lg:py-32'>
+					<div className='container flex max-w-full flex-col items-center gap-4 text-center px-4'>
+						<h1 className='text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl'>
+							Collaborative note-taking made simple
+						</h1>
+						<p className='max-w-3xl leading-normal text-muted-foreground sm:text-xl sm:leading-8'>
+							Create, share, and collaborate on notes in
+							real-time. Perfect for teams, students, and anyone
+							who wants to organize their thoughts.
+						</p>
+						<div className='flex flex-col sm:flex-row items-center justify-center gap-4'>
+							<Link href='/auth/register'>
+								<Button size='lg'>Get Started</Button>
+							</Link>
+							<Link href='/auth/login'>
+								<Button variant='outline' size='lg'>
+									Sign In
+								</Button>
+							</Link>
+						</div>
+					</div>
+				</section>
+				<section className='container space-y-6 py-6 sm:py-8 md:py-12 lg:py-24 px-4'>
+					<div className='mx-auto flex max-w-5xl flex-col items-center space-y-4 text-center'>
+						<h2 className='text-3xl font-bold leading-tight sm:text-4xl md:text-5xl'>
+							Features
+						</h2>
+						<p className='max-w-4xl leading-normal text-muted-foreground sm:text-lg sm:leading-7'>
+							Everything you need to create and share your notes.
+						</p>
+					</div>
+					{/* Features Grid */}
+					<div className='mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6'>
+						{[
+							{
+								title: "Real-time Collaboration",
+								description:
+									"Work together with your team in real-time, seeing changes as they happen.",
+							},
+							{
+								title: "Markdown Support",
+								description:
+									"Format your notes with Markdown for rich text formatting.",
+							},
+							{
+								title: "Organize with Notebooks",
+								description:
+									"Keep your noRea organized in notebooks for different projects.",
+							},
+							{
+								title: "Sharing Controls",
+								description:
+									"Control who can view or edit your notebooks with fine-grained permissions.",
+							},
+							{
+								title: "Version History",
+								description:
+									"Track changes and revert to previous versions when needed.",
+							},
+							{
+								title: "Cross-platform",
+								description:
+									"Access your notes from any device with a web browser.",
+							},
+						].map((feature, index) => (
+							<div
+								key={index}
+								className='relative overflow-hidden rounded-lg border bg-background shadow-md p-6 hover:shadow-xl transition-shadow duration-300'>
+								<div className='space-y-2'>
+									<h3 className='font-bold text-lg'>
+										{feature.title}
+									</h3>
+									<p className='text-sm text-muted-foreground'>
+										{feature.description}
+									</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</section>
 			</main>
-			<footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="/file.svg"
-						alt="File icon"
-						width={16}
-						height={16}
-					/>
-					Learn
-				</a>
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="/window.svg"
-						alt="Window icon"
-						width={16}
-						height={16}
-					/>
-					Examples
-				</a>
-				<a
-					className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-					href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<Image
-						aria-hidden
-						src="/globe.svg"
-						alt="Globe icon"
-						width={16}
-						height={16}
-					/>
-					Go to nextjs.org →
-				</a>
+
+			<footer className='border-t py-6 md:py-0 bg-background'>
+				<div className='container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row'>
+					<p className='text-center text-sm leading-loose text-muted-foreground md:text-left'>
+						&copy; {new Date().getFullYear()} SharedNotebook. All
+						rights reserved.
+					</p>
+				</div>
 			</footer>
 		</div>
 	);
